@@ -9,6 +9,6 @@ public class Main {
 
     public static void main(String[] Args) {
 
-        new GUI();
+        new OriginsGUI();
     }
 }
