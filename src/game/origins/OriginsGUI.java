@@ -13,8 +13,10 @@ public class OriginsGUI extends JFrame{
 
 
     //data members
-    private JPanel mainImagePanel; //Displays picture of enemies
+    private JPanel mainImagePanel;
     private final ImageIcon originsWindowImage = new ImageIcon("src/game/origins/images/OriginsIcon.png"); //Image of Origins icon
+
+
     /**
      * Constructor that creates the framework of the actual game
      */
