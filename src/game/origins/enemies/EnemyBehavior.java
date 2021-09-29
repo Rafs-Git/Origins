@@ -1,14 +1,37 @@
 package game.origins.enemies;
 
+/**
+ * Interface that which contains all universal actions of monsters in Origins.
+ */
 public interface EnemyBehavior {
 
+    /**
+     * Monster attacks
+     */
     void enemyAttack();
+
+    /**
+     * Monster activates its skill
+     */
     void enemySkill();
+
+    /**
+     * Monster's unique skill
+     */
     void uniqueEnemyPassive();
-    int damageTaken(int userAttack);
+
+    /**
+     * Monster receives an attack
+     * @param userAttack amount of damage the user inflicts
+     */
+    void damageTaken(int userAttack);
 
 
-    default boolean shinyCounter() {
+    /**
+     * Determines whether this instance of monster is a shiny
+     * @return boolean value of shiny status
+     */
+    default boolean shinyStatus() {
         double shinyChance = Math.random();
         boolean isShiny;
         if (shinyChance <= .05) {
