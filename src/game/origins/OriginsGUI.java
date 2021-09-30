@@ -13,7 +13,8 @@ public class OriginsGUI extends JFrame{
 
 
     //data members
-    private JPanel mainImagePanel;
+    private JPanel mainImagePanel, mainButtonPanel, mainTextPanel;
+    private JButton attack, defend, heal;
     private final ImageIcon ORIGINS_ICON_IMAGE = new ImageIcon("src/game/origins/images/OriginsIcon.png"); //Image of Origins icon
     private JLabel skeleton, lost, jinn, homunculus, abomination;
     private final ImageIcon NORMAL_SKELETON_IMAGE = new ImageIcon("src/game/origins/images/Skeleton.png");
@@ -44,7 +45,7 @@ public class OriginsGUI extends JFrame{
     public OriginsGUI() {
 
         this.setTitle("Origins");
-        this.setSize(1200,800);
+        this.setSize(1200,700);
         this.setResizable(false);
         this.setLayout(null);
         this.setLocationRelativeTo(null);
@@ -52,12 +53,33 @@ public class OriginsGUI extends JFrame{
 
         mainImagePanel = new JPanel();
         mainImagePanel.setBounds(0, 0, 1200, 400);
+        mainButtonPanel = new JPanel();
+        mainButtonPanel.setLayout(null);
+        mainButtonPanel.setBounds(0,400,600,300);
+        mainTextPanel = new JPanel();
+        mainTextPanel.setLayout(null);
+        mainTextPanel.setBounds(600,400,600,300);
 
+        attack = new JButton();
+        attack.setBounds(75, 50, 100, 150);
+        defend = new JButton();
+        defend.setBounds(225, 50, 100, 150);
+        heal = new JButton();
+        heal.setBounds(375, 50, 100, 150);
+
+        mainButtonPanel.add(heal);
+        mainButtonPanel.add(attack);
+        mainButtonPanel.add(defend);
+
+        mainImagePanel.add(SHINY_ABOMINATION);
+        heal.setVisible(true);
+        attack.setVisible(true);
+        defend.setVisible(true);
 
         this.add(mainImagePanel);
+        this.add(mainButtonPanel);
         this.setIconImage(ORIGINS_ICON_IMAGE.getImage());
         this.setVisible(true);
-
 
     }
 }
