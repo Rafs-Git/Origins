@@ -32,7 +32,10 @@ public class OriginsGUI extends JFrame{
     private final JLabel SHINY_JINN = new JLabel(SHINY_JINN_IMAGE);
     private final JLabel LOST = new JLabel(NORMAL_LOST_IMAGE);
     private final JLabel SHINY_LOST = new JLabel(SHINY_LOST_IMAGE);
-
+    private final JLabel ABOMINATION = new JLabel(NORMAL_ABOMINATION_IMAGE);
+    private final JLabel SHINY_ABOMINATION = new JLabel(SHINY_ABOMINATION_IMAGE);
+    private final JLabel HOMUNCULUS = new JLabel(NORMAL_HOMUNCULUS_IMAGE);
+    private final JLabel SHINY_HOMUNCULUS = new JLabel(SHINY_HOMUNCULUS_IMAGE);
 
 
     /**
