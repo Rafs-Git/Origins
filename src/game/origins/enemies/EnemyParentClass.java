@@ -7,7 +7,7 @@ import java.util.Random;
  *     Main Enemy class which all enemies will inherit from, contains core methodologies and functions of enemies.
  * </p>
  */
-public class Enemy implements EnemyBehavior {
+public class EnemyParentClass implements EnemyBehavior {
 
     //Enemy Data Members
     int level, defenseStat, attackStat, speedStat, healthStat;
@@ -71,5 +71,7 @@ public class Enemy implements EnemyBehavior {
         healthStat -= damage;
 
     }
+
+
 
 }

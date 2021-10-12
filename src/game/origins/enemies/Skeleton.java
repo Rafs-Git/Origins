@@ -7,7 +7,7 @@ import java.util.Random;
  *     Creates an ominous and tall Skeleton class enemy. With strong attack, weak defense, average speed, and a strong offensive skill, you must be ready to take some damage.
  * </p>
  */
-public class Skeleton extends Enemy{
+public class Skeleton extends EnemyParentClass {
 
     /**
      * Creates a Skeleton enemy based on its level
@@ -23,8 +23,8 @@ public class Skeleton extends Enemy{
     }
 
     //Skeleton data members
-    int level, defenseStat, attackStat, speedStat, healthStat;
-    boolean shiny;
+    private int level, defenseStat, attackStat, speedStat, healthStat;
+    private boolean shiny;
     private final int BASE_DEFENSE = 2;
     private final int BASE_ATTACK = 6;
     private final int BASE_SPEED = 4;

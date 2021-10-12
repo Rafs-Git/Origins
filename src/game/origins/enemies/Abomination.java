@@ -8,7 +8,7 @@ import java.util.Random;
  *     use his lack of health to your advantage.
  * </p>
  */
-public class Abomination extends Enemy{
+public class Abomination extends EnemyParentClass {
 
     /**
      * Creates an Abomination enemy based on its level
@@ -24,8 +24,8 @@ public class Abomination extends Enemy{
     }
 
     //Abomination data members
-    int level, defenseStat, attackStat, speedStat, healthStat;
-    boolean shiny;
+    private int level, defenseStat, attackStat, speedStat, healthStat;
+    private boolean shiny;
     private final int BASE_DEFENSE = 4;
     private final int BASE_ATTACK = 8;
     private final int BASE_SPEED = 2;

@@ -8,7 +8,7 @@ import java.util.Random;
  *     to increase his evasion, make sure you kill it quick before its too late.
  * </p>
  */
-public class Jinn extends Enemy{
+public class Jinn extends EnemyParentClass {
 
     /**
      * Creates a Jinn enemy based on its level
@@ -24,8 +24,8 @@ public class Jinn extends Enemy{
     }
 
     //Jinn data members
-    int level, defenseStat, attackStat, speedStat, healthStat;
-    boolean shiny;
+    private int level, defenseStat, attackStat, speedStat, healthStat;
+    private boolean shiny;
     private final int BASE_DEFENSE = 4;
     private final int BASE_ATTACK = 4;
     private final int BASE_SPEED = 4;

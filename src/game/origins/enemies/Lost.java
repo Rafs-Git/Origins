@@ -5,9 +5,10 @@ import java.util.Random;
 /**
  * <p>
  *     Creates a Lost class enemy, which is a corrupt human who has lost his way. Frail base stats but has a devastatingly cunning skill.
+ *     User shares similar base stats.
  * </p>
  */
-public class Lost extends Enemy{
+public class Lost extends EnemyParentClass {
 
     /**
      * Creates a Lost enemy based on its level
@@ -23,8 +24,8 @@ public class Lost extends Enemy{
     }
 
     //Lost data members
-    int level, defenseStat, attackStat, speedStat, healthStat;
-    boolean shiny;
+    private int level, defenseStat, attackStat, speedStat, healthStat;
+    private boolean shiny;
     private final int BASE_DEFENSE = 3;
     private final int BASE_ATTACK = 3;
     private final int BASE_SPEED = 4;

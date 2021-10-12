@@ -7,7 +7,7 @@ import java.util.Random;
  *     Creates a Homunculus class enemy that is insanely tanky. Nimble with high health and defense, what he makes up in defense he lacks in offense.
  * </p>
  */
-public class Homunculus extends Enemy{
+public class Homunculus extends EnemyParentClass {
 
     /**
      * Creates a Homunculus enemy based on its level
@@ -23,8 +23,8 @@ public class Homunculus extends Enemy{
     }
 
     //Homunculus data members
-    int level, defenseStat, attackStat, speedStat, healthStat;
-    boolean shiny;
+    private int level, defenseStat, attackStat, speedStat, healthStat;
+    private boolean shiny;
     private final int BASE_DEFENSE = 7;
     private final int BASE_ATTACK = 2;
     private final int BASE_SPEED = 4;
