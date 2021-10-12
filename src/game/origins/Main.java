@@ -15,6 +15,12 @@ public class Main {
 
     public static void main(String[] Args) {
 
+        int lostNum = 0;
+        int homunculusNum = 0;
+        int abominationNum = 0;
+        int jinnNum = 0;
+        int skeletonNum = 0;
+
         Abomination [] abominations = new Abomination[10];
         Homunculus [] homunculi = new Homunculus[10];
         Jinn [] jinns = new Jinn[10];
@@ -24,5 +30,23 @@ public class Main {
         new OriginsGUI();
 
 
+
+
+    }
+
+    public static int enemyType(int lostNum, int homunculusNum, int abominationNum, int jinnNum, int skeletonNum) {
+
+        int number = new Random().nextInt(5) + 1;
+        if (number == 1) {
+
+        } else if (number == 2) {
+
+        } else if (number == 3) {
+
+        } else if (number == 4) {
+
+        } else if (number == 5) {
+
+        }
     }
 }

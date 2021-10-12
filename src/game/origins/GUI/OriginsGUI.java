@@ -65,13 +65,13 @@ public class OriginsGUI{
 
         attack = new JButton();
         attack.setBounds(75, 50, 100, 150);
-        //attack.addActionListener(e -> userAttacks(playerOne.getAttackStat()));
+        attack.addActionListener(e -> userAttacks(playerOne.getAttackStat()));
         defend = new JButton();
         defend.setBounds(225, 50, 100, 150);
-        //defend.addActionListener(e -> userAttacks(playerOne.getDefenseStat()));
+        defend.addActionListener(e -> userAttacks(playerOne.getDefenseStat()));
         heal = new JButton();
         heal.setBounds(375, 50, 100, 150);
-        //heal.addActionListener(e -> userAttacks(playerOne.getAttackStat()));
+        heal.addActionListener(e -> userAttacks(playerOne.getAttackStat()));
 
         mainButtonPanel.add(heal);
         mainButtonPanel.add(attack);
@@ -88,15 +88,15 @@ public class OriginsGUI{
 
     }
 
-    //private double userAttacks(int userAttack) {
+    private double userAttacks(int userAttack) {
 
-    //}
-    //private double heal(int userAttack) {
+    }
+    private double heal(int userAttack) {
 
-    //}
-    //private double defend() {
+    }
+    private double defend() {
 
-    //}
+    }
 
     public static void summonEnemy(int monsterNum, int monsterLevel, JPanel mainImagePanel) {
         if (monsterNum == 1) {

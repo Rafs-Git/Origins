@@ -29,20 +29,4 @@ public class EnemyAction {
         OriginsGUI.removeEnemy(enemyIndex, OriginsGUI.getMainImagePanel());
     }
 
-    public static void enemyType() {
-
-        int number = new Random().nextInt(5) + 1;
-        if (number == 1) {
-
-        } else if (number == 2) {
-
-        } else if (number == 3) {
-
-        } else if (number == 4) {
-
-        } else if (number == 5) {
-
-        }
-    }
-
 }
