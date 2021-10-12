@@ -1,4 +1,4 @@
-package game.origins;
+package game.origins.GUI;
 
 
 import javax.swing.*;

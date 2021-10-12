@@ -1,5 +1,7 @@
 package game.origins;
 
+import game.origins.GUI.OriginsGUI;
+
 /**
  * @author Rafeedmefood
  * <p>
