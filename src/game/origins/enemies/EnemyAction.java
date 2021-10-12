@@ -1,5 +1,7 @@
 package game.origins.enemies;
 
+import game.origins.GUI.OriginsGUI;
+
 import javax.swing.*;
 
 /**
@@ -20,13 +22,14 @@ public class EnemyAction {
      * @param enemyIndex Specified enemy index
      */
     public static void summonEnemy(int enemyIndex) {
+        OriginsGUI.summonEnemy(enemyIndex, OriginsGUI.getMainImagePanel());
     }
 
     /**
      * Used to clear out the enemy after it's defeat
      */
-    public static void removeEnemy() {
-
+    public static void removeEnemy(int enemyIndex) {
+        OriginsGUI.removeEnemy(enemyIndex, OriginsGUI.getMainImagePanel());
     }
 
 }
