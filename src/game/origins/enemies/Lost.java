@@ -14,7 +14,7 @@ public class Lost extends EnemyParentClass {
      * Creates a Lost enemy based on its level
      * @param level
      */
-    Lost(int level) {
+    public Lost(int level) {
         this.level = level;
         defenseStat = level * BASE_DEFENSE;
         attackStat = level * BASE_ATTACK;

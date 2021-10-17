@@ -13,7 +13,7 @@ public class Skeleton extends EnemyParentClass {
      * Creates a Skeleton enemy based on its level
      * @param level
      */
-    Skeleton(int level) {
+    public Skeleton(int level) {
         this.level = level;
         defenseStat = level * BASE_DEFENSE;
         attackStat = level * BASE_ATTACK;

@@ -1,6 +1,8 @@
 package game.origins.GUI;
 
 
+import game.origins.enemies.*;
+
 import javax.swing.*;
 
 /**
@@ -11,12 +13,17 @@ import javax.swing.*;
 public class OriginsGUI{
 
     //data members
-    public static JFrame mainFrame;
-    public static JPanel mainImagePanel;
+    private final Abomination[] abominationObjects;
+    private final Homunculus[] homunculusObjects;
+    private final Jinn[] jinnObjects;
+    private final Lost[] lostObjects;
+    private final Skeleton[] skeletonObjects;
     private JPanel mainButtonPanel, mainTextPanel;
     private JButton attack, defend, heal;
-    private final ImageIcon ORIGINS_ICON_IMAGE = new ImageIcon("src/game/origins/images/OriginsIcon.png"); //Image of Origins icon
     private JLabel skeleton, lost, jinn, homunculus, abomination;
+    private final ImageIcon ORIGINS_ICON_IMAGE = new ImageIcon("src/game/origins/images/OriginsIcon.png"); //Image of Origins icon
+    public static JFrame mainFrame;
+    public static JPanel mainImagePanel;
     private static final ImageIcon NORMAL_SKELETON_IMAGE = new ImageIcon("src/game/origins/images/Skeleton.png");
     private static final ImageIcon SHINY_SKELETON_IMAGE = new ImageIcon("src/game/origins/images/ShinySkeletonOrigins.png");
     private static final ImageIcon NORMAL_JINN_IMAGE = new ImageIcon("src/game/origins/images/JinnOrigins.png");
@@ -39,12 +46,19 @@ public class OriginsGUI{
     private static final JLabel SHINY_HOMUNCULUS = new JLabel(SHINY_HOMUNCULUS_IMAGE);
 
 
+
     /**
      * Constructor that creates the framework of the actual game
      */
     public OriginsGUI() {
 
         User playerOne = new User(1);
+
+        abominationObjects = new Abomination[10];
+        homunculusObjects = new Homunculus[10];
+        jinnObjects = new Jinn[10];
+        lostObjects = new Lost[10];
+        skeletonObjects = new Skeleton[10];
 
         mainFrame = new JFrame();
         mainFrame.setTitle("Origins");
@@ -65,13 +79,13 @@ public class OriginsGUI{
 
         attack = new JButton();
         attack.setBounds(75, 50, 100, 150);
-        attack.addActionListener(e -> userAttacks(playerOne.getAttackStat()));
+        attack.addActionListener(e -> userAttacks(playerOne, EnemyAction.getCurrentEnemy()));
         defend = new JButton();
         defend.setBounds(225, 50, 100, 150);
-        defend.addActionListener(e -> userAttacks(playerOne.getDefenseStat()));
+        defend.addActionListener(e -> userDefends(playerOne));
         heal = new JButton();
         heal.setBounds(375, 50, 100, 150);
-        heal.addActionListener(e -> userAttacks(playerOne.getAttackStat()));
+        heal.addActionListener(e -> userHeals(playerOne));
 
         mainButtonPanel.add(heal);
         mainButtonPanel.add(attack);
@@ -88,17 +102,46 @@ public class OriginsGUI{
 
     }
 
-    private double userAttacks(int userAttack) {
+
+    private double userAttacks(User player, int monsterType) {
+        if (monsterType == 1) {
+            double damage = player.getAttackStat() - abominationObjects[EnemyAction.getAbominationNum()].getDefenseStat();
+            return damage;
+        }
+
+        else if (monsterType == 2) {
+            double damage = player.getAttackStat() - (homunculusObjects[EnemyAction.getHomunculusNum()].getDefenseStat() * .5);
+            return damage;
+        }
+
+        else if (monsterType == 3) {
+            double damage = player.getAttackStat() - (jinnObjects[EnemyAction.getJinnNum()].getDefenseStat() * .5);
+            return damage;
+        }
+
+        else if (monsterType == 4) {
+            double damage = player.getAttackStat() - (lostObjects[EnemyAction.getLostNum()].getDefenseStat() * .5);
+            return damage;
+        }
+
+        else {
+            double damage = player.getAttackStat() - (skeletonObjects[EnemyAction.getSkeletonNum()].getDefenseStat() * .5);
+            return damage;
+        }
+    }
+    private void userDefends(User player) {
+
+        player.defendAction();
 
     }
-    private double heal(int userAttack) {
+    private void userHeals(User player) {
+
+        player.healAction();
 
     }
-    private double defend() {
 
-    }
 
-    public static void summonEnemy(int monsterNum, int monsterLevel, JPanel mainImagePanel) {
+    public static void showEnemy(int monsterNum, JPanel mainImagePanel) {
         if (monsterNum == 1) {
             mainImagePanel.add(ABOMINATION);
 
@@ -168,6 +211,8 @@ public class OriginsGUI{
         mainFrame.add(mainImagePanel);
         mainFrame.setVisible(true);
     }
+
+
 
     public static JPanel getMainImagePanel() {
         return mainImagePanel;

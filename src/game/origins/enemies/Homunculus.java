@@ -13,7 +13,7 @@ public class Homunculus extends EnemyParentClass {
      * Creates a Homunculus enemy based on its level
      * @param level
      */
-    Homunculus(int level) {
+    public Homunculus(int level) {
         this.level = level;
         defenseStat = level * BASE_DEFENSE;
         attackStat = level * BASE_ATTACK;

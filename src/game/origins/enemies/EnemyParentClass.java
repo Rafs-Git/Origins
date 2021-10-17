@@ -72,6 +72,7 @@ public class EnemyParentClass implements EnemyBehavior {
 
     }
 
-
-
+    public int getDefenseStat() {
+        return defenseStat;
+    }
 }

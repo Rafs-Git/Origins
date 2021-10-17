@@ -14,7 +14,7 @@ public class Abomination extends EnemyParentClass {
      * Creates an Abomination enemy based on its level
      * @param level
      */
-    Abomination(int level) {
+    public Abomination(int level) {
         this.level = level;
         defenseStat = level * BASE_DEFENSE;
         attackStat = level * BASE_ATTACK;
@@ -55,6 +55,8 @@ public class Abomination extends EnemyParentClass {
     public double getBASE_EVASION() {
         return BASE_EVASION;
     }
+
+
 
     @Override
     public boolean isShiny() {

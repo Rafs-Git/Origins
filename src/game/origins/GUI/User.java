@@ -2,13 +2,18 @@ package game.origins.GUI;
 
 public class User {
 
-    private int level, defenseStat, attackStat, speedStat, healthStat;
+    private double level;
+    private double defenseStat;
+    private double attackStat;
+    private double speedStat;
+    private double healthStat;
     private final String name = "User";
     private final int BASE_DEFENSE = 3;
     private final int BASE_ATTACK = 3;
     private final int BASE_SPEED = 4;
     private final int BASE_HP = 20;
     private final double BASE_EVASION = .04;
+    private double fullHP;
 
     User(int level) {
         setLevel(level);
@@ -18,11 +23,11 @@ public class User {
         return name;
     }
 
-    public int getLevel() {
+    public double getLevel() {
         return level;
     }
 
-    public void setLevel(int level) {
+    public void setLevel(double level) {
         this.level = level;
         setAttackStat();
         setDefenseStat();
@@ -30,7 +35,7 @@ public class User {
         setSpeedStat();
     }
 
-    public int getDefenseStat() {
+    public double getDefenseStat() {
         return defenseStat;
     }
 
@@ -38,7 +43,7 @@ public class User {
         this.defenseStat = this.defenseStat * this.getLevel();
     }
 
-    public int getAttackStat() {
+    public double getAttackStat() {
         return attackStat;
     }
 
@@ -46,7 +51,7 @@ public class User {
         this.attackStat = this.attackStat * this.getLevel();
     }
 
-    public int getSpeedStat() {
+    public double getSpeedStat() {
         return speedStat;
     }
 
@@ -54,12 +59,23 @@ public class User {
         this.speedStat = this.speedStat * this.getLevel();
     }
 
-    public int getHealthStat() {
+    public double getHealthStat() {
         return healthStat;
     }
 
     public void setHealthStat() {
         this.healthStat = this.healthStat * this.getLevel();
+        this.fullHP = this.healthStat;
+    }
+
+    public void defendAction() {
+        this.defenseStat = this.defenseStat * 2;
+    }
+
+    public void healAction() {
+        if (this.healthStat < this.fullHP) {
+            this.healthStat += (this.attackStat);
+        }
     }
 }
 

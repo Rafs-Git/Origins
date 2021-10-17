@@ -14,7 +14,7 @@ public class Jinn extends EnemyParentClass {
      * Creates a Jinn enemy based on its level
      * @param level
      */
-    Jinn(int level) {
+    public Jinn(int level) {
         this.level = level;
         defenseStat = level * BASE_DEFENSE;
         attackStat = level * BASE_ATTACK;
