@@ -67,6 +67,71 @@ public class EnemyAction {
         OriginsGUI.removeEnemy(enemyIndex, OriginsGUI.getMainImagePanel(), currentEvent);
     }
 
+    public static void enemyAttacks(Abomination[] abominations, Homunculus[] homunculi, Jinn[] jinns, Lost[] lost, Skeleton[] skeletons,User user) {
+        int damage;
+        if (currentEnemyType == 1) {
+            damage = abominations[abominationNum].getAttackStat() - user.getDefenseStat();
+            user.userEvade(damage);
+        }
+
+        else if (currentEnemyType == 2) {
+            damage = homunculi[homunculusNum].getAttackStat() - user.getDefenseStat();
+            user.userEvade(damage);
+        }
+
+        else if (currentEnemyType == 3) {
+            damage = jinns[jinnNum].getAttackStat() - user.getDefenseStat();
+            user.userEvade(damage);
+        }
+
+        else if (currentEnemyType == 4) {
+            damage = lost[lostNum].getAttackStat() - user.getDefenseStat();
+            user.userEvade(damage);
+        }
+
+        else {
+            damage = skeletons[skeletonNum].getAttackStat() - user.getDefenseStat();
+            user.userEvade(damage);
+        }
+    }
+
+    public static boolean isEnemyAlive(Abomination[] abominations, Homunculus[] homunculi, Jinn[] jinns, Lost[] lost, Skeleton[] skeletons) {
+        if (currentEnemyType == 1) {
+            if (abominations[abominationNum].getHealthStat() <= 0) {
+                return false;
+            }
+            else return true;
+        }
+
+        else if (currentEnemyType == 2) {
+            if (homunculi[homunculusNum].getHealthStat() <= 0) {
+                return false;
+            }
+            else return true;
+        }
+
+        else if (currentEnemyType == 3) {
+            if (jinns[jinnNum].getHealthStat() <= 0) {
+                return false;
+            }
+            else return true;
+        }
+
+        else if (currentEnemyType == 4) {
+            if (lost[lostNum].getHealthStat() <= 0) {
+                return false;
+            }
+            else return true;
+        }
+
+        else {
+            if (skeletons[skeletonNum].getHealthStat() <= 0) {
+                return false;
+            }
+            else return true;
+        }
+    }
+
     public static int getLostNum() {
         return lostNum;
     }
