@@ -24,8 +24,6 @@ public class Homunculus extends EnemyParentClass {
     }
 
     //Homunculus data members
-    private int level, defenseStat, attackStat, speedStat, healthStat;
-    private boolean shiny;
     private final int BASE_DEFENSE = 7;
     private final int BASE_ATTACK = 2;
     private final int BASE_SPEED = 4;

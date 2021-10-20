@@ -25,8 +25,6 @@ public class Lost extends EnemyParentClass {
     }
 
     //Lost data members
-    private int level, defenseStat, attackStat, speedStat, healthStat;
-    private boolean shiny;
     private final int BASE_DEFENSE = 3;
     private final int BASE_ATTACK = 3;
     private final int BASE_SPEED = 4;

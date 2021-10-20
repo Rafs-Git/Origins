@@ -24,8 +24,6 @@ public class Skeleton extends EnemyParentClass {
     }
 
     //Skeleton data members
-    private int level, defenseStat, attackStat, speedStat, healthStat;
-    private boolean shiny;
     private final int BASE_DEFENSE = 2;
     private final int BASE_ATTACK = 6;
     private final int BASE_SPEED = 4;

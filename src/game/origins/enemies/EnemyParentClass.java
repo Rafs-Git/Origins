@@ -68,8 +68,12 @@ public class EnemyParentClass implements EnemyBehavior {
      */
     public void damageTaken(double userAttack) {
 
-        healthStat -= userAttack;
-
+        if (userAttack <= 0) {
+            healthStat -= 0;
+        }
+        else {
+            healthStat -= userAttack;
+        }
     }
 
     public int getDefenseStat() {

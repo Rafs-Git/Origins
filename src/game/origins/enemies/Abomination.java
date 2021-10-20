@@ -16,17 +16,15 @@ public class Abomination extends EnemyParentClass {
      * @param level
      */
     public Abomination(int level) {
-        this.level = level;
-        defenseStat = level * BASE_DEFENSE;
-        attackStat = level * BASE_ATTACK;
-        speedStat = level * BASE_SPEED;
-        healthStat = level * BASE_HP;
-        shiny = shinyStatus();
+            this.level = level;
+            defenseStat = level * BASE_DEFENSE;
+            attackStat = level * BASE_ATTACK;
+            speedStat = level * BASE_SPEED;
+            healthStat = level * BASE_HP;
+            shiny = shinyStatus();
     }
 
     //Abomination data members
-    private int level, defenseStat, attackStat, speedStat, healthStat;
-    private boolean shiny;
     private final int BASE_DEFENSE = 4;
     private final int BASE_ATTACK = 8;
     private final int BASE_SPEED = 2;
