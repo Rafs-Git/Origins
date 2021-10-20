@@ -17,16 +17,25 @@ public class Lost extends EnemyParentClass {
      */
     public Lost(int level) {
         this.level = level;
-        defenseStat = level * BASE_DEFENSE;
-        attackStat = level * BASE_ATTACK;
-        speedStat = level * BASE_SPEED;
-        healthStat = level * BASE_HP;
         shiny = shinyStatus();
+        if (isShiny()) {
+            defenseStat = level * (BASE_DEFENSE + 3);
+            attackStat = level * (BASE_ATTACK + 3);
+            speedStat = level * (BASE_SPEED + 1);
+            healthStat = level * (BASE_HP + 2);
+        }
+        else {
+            defenseStat = level * BASE_DEFENSE;
+            attackStat = level * BASE_ATTACK;
+            speedStat = level * BASE_SPEED;
+            healthStat = level * BASE_HP;
+            shiny = shinyStatus();
+        }
     }
 
     //Lost data members
-    private final int BASE_DEFENSE = 3;
-    private final int BASE_ATTACK = 3;
+    private final int BASE_DEFENSE = 4;
+    private final int BASE_ATTACK = 4;
     private final int BASE_SPEED = 4;
     private final int BASE_HP = 20;
     private final double BASE_EVASION = .04;

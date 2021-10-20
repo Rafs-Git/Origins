@@ -22,10 +22,6 @@ public class User {
         setLevel(level);
     }
 
-    public String getName() {
-        return this.name;
-    }
-
     public int getLevel() {
         return level;
     }
@@ -47,7 +43,7 @@ public class User {
             defenseStat = BASE_DEFENSE;
         }
         else {
-            defenseStat = defenseStat * getLevel();
+            defenseStat = BASE_DEFENSE * getLevel();
         }
     }
 
@@ -60,7 +56,7 @@ public class User {
             attackStat = BASE_ATTACK;
         }
         else {
-            attackStat = attackStat * getLevel();
+            attackStat = BASE_ATTACK * getLevel();
         }
     }
 
@@ -73,7 +69,7 @@ public class User {
             speedStat = BASE_SPEED;
         }
         else {
-            speedStat = speedStat * getLevel();
+            speedStat = BASE_SPEED * getLevel();
         }
     }
 
@@ -85,10 +81,7 @@ public class User {
         if (level == 1) {
             healthStat = BASE_HP;
         }
-        else {
-            healthStat = healthStat * getLevel();
-        }
-        fullHP = healthStat;
+        fullHP = level * BASE_HP;
     }
 
     public void defendAction(JTextArea currentEvent) {
@@ -96,13 +89,18 @@ public class User {
         currentEvent.setText("You raise your shield and grit your teeth, preparing to defend from a heavy hit");
     }
 
+
     public void healAction(JTextArea currentEvent) {
         if (healthStat < fullHP) {
             healthStat += (attackStat * 3);
             currentEvent.setText("You have healed your hp for " + (attackStat * 3) + " points! You now currently have "
                     + healthStat + " much HP!");
         }
-        else currentEvent.setText("ALAS, the stress of the battle got into your head and it seems you attempted to heal yourself at full HP");
+        else {
+            currentEvent.setText("ALAS, the stress of the battle got into your head and it seems you attempted to heal yourself at full HP! " +
+                    "Your heal is ineffective if you have more than " + fullHP + " HP, and you currently have " + healthStat + " HP!");
+        }
+
     }
 
     public void userEvade(int damage) {
@@ -117,9 +115,29 @@ public class User {
     }
 
     public void userDamageTaken(int damage) {
-        healthStat -= damage;
-        OriginsGUI.textEditor("Unfortunately, you have taken " + damage + " damage and have a remaining " + healthStat + " hp!");
+        if (damage <= 0) {
+            OriginsGUI.textEditor("HA! You proved to be too strong for the enemy to inflict damage upon you.");
+        }
+        else {
+            healthStat -= damage;
+            if(healthStat > 0) {
+                OriginsGUI.textEditor("Unfortunately, you have taken " + damage + " damage and have a remaining " + healthStat + " hp!");
+            }
+            else {
+                OriginsGUI.textEditor("What a tragedy, it seems that you have died. Goodbye!");
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    OriginsGUI.textEditor("EROOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOR");
+                }
+                OriginsGUI.death();
+            }
+
+        }
     }
 
+    public int getFullHP() {
+        return fullHP;
+    }
 }
 

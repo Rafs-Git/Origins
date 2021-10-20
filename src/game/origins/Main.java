@@ -19,29 +19,40 @@ public class Main {
 
         User playerOne = new User(1);
         new OriginsGUI(playerOne);
-        int num;
-        int level = 1;
+        int num, level;
         boolean isActionDone = false;
 
 
-        num = OriginsGUI.enemyInstance(level);
+        for (int i = 1; i < 1000; i++) {
 
-        do {
-
-            while (!isActionDone) {
-                Thread.sleep(1);
-                isActionDone = OriginsGUI.isActionDone();
-            }
             OriginsGUI.hideButtons();
+            level = i;
+            playerOne.setLevel(level);
+            num = OriginsGUI.enemyInstance(level);
             Thread.sleep(3000);
-            if (OriginsGUI.checkEnemyHealth()) {
-                OriginsGUI.enemyAttacker(playerOne);
-            }
-            Thread.sleep(1500);
-            OriginsGUI.setActionDone(false);
-            isActionDone = false;
             OriginsGUI.showButtons();
+            do {
 
-        } while (OriginsGUI.checkEnemyHealth());
+                OriginsGUI.textEditor("What is your next move? You currently have " + playerOne.getHealthStat() + " health, and a "+ playerOne.getFullHP() +
+                        "HP cap to your Heal.");
+                while (!isActionDone) {
+                    Thread.sleep(1);
+                    isActionDone = OriginsGUI.isActionDone();
+                }
+                OriginsGUI.hideButtons();
+                Thread.sleep(1500);
+                if (OriginsGUI.checkEnemyHealth()) {
+                    OriginsGUI.enemyAttacker(playerOne);
+                    playerOne.setDefenseStat();
+                }
+                Thread.sleep(1500);
+                OriginsGUI.setActionDone(false);
+                isActionDone = false;
+                OriginsGUI.showButtons();
+
+            } while (OriginsGUI.checkEnemyHealth());
+
+            OriginsGUI.removeEnemyInstance(num);
+        }
     }
 }

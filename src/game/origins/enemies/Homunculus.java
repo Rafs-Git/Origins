@@ -16,18 +16,27 @@ public class Homunculus extends EnemyParentClass {
      */
     public Homunculus(int level) {
         this.level = level;
-        defenseStat = level * BASE_DEFENSE;
-        attackStat = level * BASE_ATTACK;
-        speedStat = level * BASE_SPEED;
-        healthStat = level * BASE_HP;
         shiny = shinyStatus();
+        if (isShiny()) {
+            defenseStat = level * (BASE_DEFENSE + 1);
+            attackStat = level * (BASE_ATTACK + 2);
+            speedStat = level * (BASE_SPEED + 1);
+            healthStat = level * (BASE_HP + 3);
+        }
+        else {
+            defenseStat = level * BASE_DEFENSE;
+            attackStat = level * BASE_ATTACK;
+            speedStat = level * BASE_SPEED;
+            healthStat = level * BASE_HP;
+            shiny = shinyStatus();
+        }
     }
 
     //Homunculus data members
-    private final int BASE_DEFENSE = 7;
-    private final int BASE_ATTACK = 2;
+    private final int BASE_DEFENSE = 5;
+    private final int BASE_ATTACK = 4;
     private final int BASE_SPEED = 4;
-    private final int BASE_HP = 50;
+    private final int BASE_HP = 35;
     private final double BASE_EVASION = .1;
 
     public boolean evasionChance(double userAttack, JTextArea currentEvent) {
