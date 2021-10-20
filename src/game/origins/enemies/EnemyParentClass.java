@@ -1,5 +1,6 @@
 package game.origins.enemies;
 
+import javax.swing.*;
 import java.util.Random;
 
 /**
@@ -7,7 +8,7 @@ import java.util.Random;
  *     Main Enemy class which all enemies will inherit from, contains core methodologies and functions of enemies.
  * </p>
  */
-public class Enemy implements EnemyBehavior {
+public class EnemyParentClass implements EnemyBehavior {
 
     //Enemy Data Members
     int level, defenseStat, attackStat, speedStat, healthStat;
@@ -65,11 +66,17 @@ public class Enemy implements EnemyBehavior {
      * Removes health from the enemy
      * @param userAttack amount of damage the user inflicted to monster
      */
-    public void damageTaken(int userAttack) {
+    public void damageTaken(double userAttack) {
 
-        int damage = userAttack - defenseStat;
-        healthStat -= damage;
-
+        if (userAttack <= 0) {
+            healthStat -= 0;
+        }
+        else {
+            healthStat -= userAttack;
+        }
     }
 
+    public int getDefenseStat() {
+        return defenseStat;
+    }
 }

@@ -1,5 +1,6 @@
 package game.origins.enemies;
 
+import javax.swing.*;
 import java.util.Random;
 
 /**
@@ -8,13 +9,13 @@ import java.util.Random;
  *     to increase his evasion, make sure you kill it quick before its too late.
  * </p>
  */
-public class Jinn extends Enemy{
+public class Jinn extends EnemyParentClass {
 
     /**
      * Creates a Jinn enemy based on its level
      * @param level
      */
-    Jinn(int level) {
+    public Jinn(int level) {
         this.level = level;
         defenseStat = level * BASE_DEFENSE;
         attackStat = level * BASE_ATTACK;
@@ -24,27 +25,22 @@ public class Jinn extends Enemy{
     }
 
     //Jinn data members
-    int level, defenseStat, attackStat, speedStat, healthStat;
-    boolean shiny;
     private final int BASE_DEFENSE = 4;
     private final int BASE_ATTACK = 4;
     private final int BASE_SPEED = 4;
     private final int BASE_HP = 30;
     private final double BASE_EVASION = .15;
 
-    /**
-     * Determines whether the monster evaded damage before it calls super class method
-     * @param userAttack amount of damage the user inflicted to monster
-     */
-    @Override
-    public void damageTaken(int userAttack) {
+    public boolean evasionChance(double userAttack, JTextArea currentEvent) {
         int rand = new Random().nextInt(100);
 
         if (rand <= (BASE_EVASION * 100)) {
-            //"ATTACK HAS BEEN EVADED"
+            currentEvent.setText("ALAS THE MONSTER EVADED YOUR ATTACK!");
+            return false;
         }
         else {
             super.damageTaken(userAttack);
+            return true;
         }
     }
 
