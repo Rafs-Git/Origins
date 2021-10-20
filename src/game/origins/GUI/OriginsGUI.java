@@ -1,7 +1,11 @@
 package game.origins.GUI;
 
 
+import game.origins.enemies.*;
+
 import javax.swing.*;
+import java.awt.*;
+import java.util.Random;
 
 /**
  * <p>
@@ -11,12 +15,17 @@ import javax.swing.*;
 public class OriginsGUI{
 
     //data members
-    public static JFrame mainFrame;
-    public static JPanel mainImagePanel;
-    private JPanel mainButtonPanel, mainTextPanel;
+    private static final Abomination[] abominationObjects = new Abomination[10];
+    private static final Homunculus[] homunculusObjects = new Homunculus[10];
+    private static final Jinn[] jinnObjects = new Jinn[10];
+    private static final Lost[] lostObjects = new Lost[10];
+    private static final Skeleton[] skeletonObjects = new Skeleton[10];
+    private JPanel mainButtonPanel;
     private JButton attack, defend, heal;
     private final ImageIcon ORIGINS_ICON_IMAGE = new ImageIcon("src/game/origins/images/OriginsIcon.png"); //Image of Origins icon
-    private JLabel skeleton, lost, jinn, homunculus, abomination;
+    private static JTextArea currentEvent;
+    public static JFrame mainFrame;
+    public static JPanel mainImagePanel;
     private static final ImageIcon NORMAL_SKELETON_IMAGE = new ImageIcon("src/game/origins/images/Skeleton.png");
     private static final ImageIcon SHINY_SKELETON_IMAGE = new ImageIcon("src/game/origins/images/ShinySkeletonOrigins.png");
     private static final ImageIcon NORMAL_JINN_IMAGE = new ImageIcon("src/game/origins/images/JinnOrigins.png");
@@ -39,6 +48,7 @@ public class OriginsGUI{
     private static final JLabel SHINY_HOMUNCULUS = new JLabel(SHINY_HOMUNCULUS_IMAGE);
 
 
+
     /**
      * Constructor that creates the framework of the actual game
      */
@@ -48,7 +58,7 @@ public class OriginsGUI{
 
         mainFrame = new JFrame();
         mainFrame.setTitle("Origins");
-        mainFrame.setSize(1200,700);
+        mainFrame.setSize(1220,700);
         mainFrame.setResizable(false);
         mainFrame.setLayout(null);
         mainFrame.setLocationRelativeTo(null);
@@ -59,19 +69,29 @@ public class OriginsGUI{
         mainButtonPanel = new JPanel();
         mainButtonPanel.setLayout(null);
         mainButtonPanel.setBounds(0,400,600,300);
-        mainTextPanel = new JPanel();
-        mainTextPanel.setLayout(null);
-        mainTextPanel.setBounds(600,400,600,300);
+
+        currentEvent = new JTextArea();
+        currentEvent.setBounds(600, 400, 600, 300);
+        currentEvent.setLineWrap(true);
+        currentEvent.setWrapStyleWord(true);
+        currentEvent.setFont(new Font("Copperplate Gothic Light", Font.PLAIN, 15));
+        currentEvent.setEditable(false);
 
         attack = new JButton();
         attack.setBounds(75, 50, 100, 150);
-        //attack.addActionListener(e -> userAttacks(playerOne.getAttackStat()));
+        attack.setText("ATTACK");
+        attack.setFocusable(false);
+        attack.addActionListener(e -> userAttacks(playerOne, EnemyAction.getCurrentEnemyType(), currentEvent));
         defend = new JButton();
         defend.setBounds(225, 50, 100, 150);
-        //defend.addActionListener(e -> userAttacks(playerOne.getDefenseStat()));
+        defend.setText("DEFEND");
+        defend.setFocusable(false);
+        defend.addActionListener(e -> userDefends(playerOne, currentEvent));
         heal = new JButton();
         heal.setBounds(375, 50, 100, 150);
-        //heal.addActionListener(e -> userAttacks(playerOne.getAttackStat()));
+        heal.setText("HEAL");
+        heal.setFocusable(false);
+        heal.addActionListener(e -> userHeals(playerOne, currentEvent));
 
         mainButtonPanel.add(heal);
         mainButtonPanel.add(attack);
@@ -80,96 +100,256 @@ public class OriginsGUI{
         heal.setVisible(true);
         attack.setVisible(true);
         defend.setVisible(true);
+        currentEvent.setVisible(true);
+
+        mainImagePanel.add(ABOMINATION);
+        ABOMINATION.setVisible(false);
+        mainImagePanel.add(SHINY_ABOMINATION);
+        SHINY_ABOMINATION.setVisible(false);
+        mainImagePanel.add(HOMUNCULUS);
+        HOMUNCULUS.setVisible(false);
+        mainImagePanel.add(SHINY_HOMUNCULUS);
+        SHINY_HOMUNCULUS.setVisible(false);
+        mainImagePanel.add(JINN);
+        JINN.setVisible(false);
+        mainImagePanel.add(SHINY_JINN);
+        SHINY_JINN.setVisible(false);
+        mainImagePanel.add(LOST);
+        LOST.setVisible(false);
+        mainImagePanel.add(SHINY_LOST);
+        SHINY_LOST.setVisible(false);
+        mainImagePanel.add(SKELETON);
+        SKELETON.setVisible(false);
+        mainImagePanel.add(SHINY_SKELETON);
+        SHINY_SKELETON.setVisible(false);
 
         mainFrame.add(mainImagePanel);
         mainFrame.add(mainButtonPanel);
+        mainFrame.add(currentEvent);
         mainFrame.setIconImage(ORIGINS_ICON_IMAGE.getImage());
         mainFrame.setVisible(true);
 
+
     }
 
-    //private double userAttacks(int userAttack) {
 
-    //}
-    //private double heal(int userAttack) {
+    private void userAttacks(User player, int monsterType, JTextArea currentEvent) {
+        if (monsterType == 1) {
+            double damage = player.getAttackStat() - abominationObjects[EnemyAction.getAbominationNum()].getDefenseStat();
+            boolean successfulHit = abominationObjects[EnemyAction.getAbominationNum()].evasionChance(damage, currentEvent);
+            if (successfulHit) {
+                currentEvent.setText("You attacked the abomination with " + damage + " much damage! The abomination has " +
+                        abominationObjects[EnemyAction.getAbominationNum()].getHealthStat() + " hp left.");
+            }
+        }
 
-    //}
-    //private double defend() {
+        else if (monsterType == 2) {
+            double damage = player.getAttackStat() - homunculusObjects[EnemyAction.getHomunculusNum()].getDefenseStat();
+            boolean successfulHit = homunculusObjects[EnemyAction.getHomunculusNum()].evasionChance(damage, currentEvent);
+            if (successfulHit) {
+                currentEvent.setText("You attacked the homunculus with " + damage + " much damage! The homunculus has " +
+                        homunculusObjects[EnemyAction.getHomunculusNum()].getHealthStat() + " hp left.");
+            }
+        }
 
-    //}
+        else if (monsterType == 3) {
+            double damage = player.getAttackStat() - jinnObjects[EnemyAction.getJinnNum()].getDefenseStat();
+            boolean successfulHit = jinnObjects[EnemyAction.getJinnNum()].evasionChance(damage, currentEvent);
+            if (successfulHit) {
+                currentEvent.setText("You attacked the jinn with " + damage + " much damage! The jinn has " +
+                        jinnObjects[EnemyAction.getJinnNum()].getHealthStat() + " hp left.");
+            }
+        }
 
-    public static void summonEnemy(int monsterNum, int monsterLevel, JPanel mainImagePanel) {
-        if (monsterNum == 1) {
-            mainImagePanel.add(ABOMINATION);
+        else if (monsterType == 4) {
+            double damage = player.getAttackStat() - lostObjects[EnemyAction.getLostNum()].getDefenseStat();
+            boolean successfulHit = lostObjects[EnemyAction.getLostNum()].evasionChance(damage, currentEvent);
+            if (successfulHit) {
+                currentEvent.setText("You attacked the lost with " + damage + " much damage! The lost has " +
+                        lostObjects[EnemyAction.getLostNum()].getHealthStat() + " hp left.");
+            }
+        }
 
+        else {
+            double damage = player.getAttackStat() - skeletonObjects[EnemyAction.getSkeletonNum()].getDefenseStat();
+            boolean successfulHit = skeletonObjects[EnemyAction.getSkeletonNum()].evasionChance(damage, currentEvent);
+            if (successfulHit) {
+                currentEvent.setText("You attacked the skeleton with " + damage + " much damage! The skeleton has " +
+                        skeletonObjects[EnemyAction.getSkeletonNum()].getHealthStat() + " hp left.");
+            }
         }
-        else if (monsterNum == 2) {
-            mainImagePanel.add(SHINY_ABOMINATION);
-        }
-        else if (monsterNum == 3) {
-            mainImagePanel.add(HOMUNCULUS);
-        }
-        else if (monsterNum == 4) {
-            mainImagePanel.add(SHINY_HOMUNCULUS);
-        }
-        else if (monsterNum == 5) {
-            mainImagePanel.add(JINN);
-        }
-        else if (monsterNum == 6) {
-            mainImagePanel.add(SHINY_JINN);
-        }
-        else if (monsterNum == 7) {
-            mainImagePanel.add(LOST);
-        }
-        else if (monsterNum == 8) {
-            mainImagePanel.add(SHINY_LOST);
-        }
-        else if (monsterNum == 9) {
-            mainImagePanel.add(SKELETON);
-        }
-        else if (monsterNum == 10) {
-            mainImagePanel.add(SHINY_SKELETON);
-        }
-        mainFrame.add(mainImagePanel);
-        mainFrame.setVisible(true);
     }
 
-    public static void removeEnemy(int monsterNum, JPanel mainImagePanel) {
+
+    private void userDefends(User player, JTextArea currentEvent) {
+
+        player.defendAction(currentEvent);
+
+    }
+    private void userHeals(User player, JTextArea currentEvent) {
+
+        player.healAction(currentEvent);
+
+    }
+
+    public static int enemyInstance(int level) {
+
+        int number = new Random().nextInt(5) + 1;
+        EnemyAction.enemyType(OriginsGUI.getAbominationObjects(), OriginsGUI.getHomunculusObjects(), OriginsGUI.getJinnObjects(),
+                OriginsGUI.getLostObjects(), OriginsGUI.getSkeletonObjects(), level, number);
+
+
+        if (number == 1) {
+            if (abominationObjects[EnemyAction.getAbominationNum()].isShiny()) {
+                EnemyAction.summonEnemy(2, currentEvent);
+                return 2;
+            }
+            else {
+                EnemyAction.summonEnemy(1, currentEvent);
+                return 1;
+            }
+        }
+
+        else if (number == 2) {
+            if (homunculusObjects[EnemyAction.getHomunculusNum()].isShiny()) {
+                EnemyAction.summonEnemy(4, currentEvent);
+                return 4;
+            }
+            else {
+                EnemyAction.summonEnemy(3, currentEvent);
+                return 3;
+            }
+        }
+
+        else if (number == 3) {
+            if (jinnObjects[EnemyAction.getJinnNum()].isShiny()) {
+                EnemyAction.summonEnemy(6, currentEvent);
+                return 6;
+            }
+            else {
+                EnemyAction.summonEnemy(5, currentEvent);
+                return 5;
+            }
+        }
+
+        else if (number == 4) {
+            if (lostObjects[EnemyAction.getLostNum()].isShiny()) {
+                EnemyAction.summonEnemy(8, currentEvent);
+                return 8;
+            }
+            else {
+                EnemyAction.summonEnemy(7, currentEvent);
+                return 7;
+            }
+        }
+
+        else {
+            if (skeletonObjects[EnemyAction.getSkeletonNum()].isShiny()) {
+                EnemyAction.summonEnemy(10, currentEvent);
+                return 10;
+            }
+            else {
+                EnemyAction.summonEnemy(9, currentEvent);
+                return 9;
+            }
+        }
+    }
+
+    public static void removeEnemyInstance(int monsterIndex) {
+        EnemyAction.removeEnemy(monsterIndex, currentEvent);
+    }
+
+    public static void showEnemy(int monsterNum, JPanel mainImagePanel, JTextArea currentEvent) {
         if (monsterNum == 1) {
-            mainImagePanel.remove(ABOMINATION);
+            ABOMINATION.setVisible(true);
+            currentEvent.setText("You hear a painful moan from behind you. With a chill down your spine, you realize an ABOMINATION has found you!");
         }
         else if (monsterNum == 2) {
-            mainImagePanel.remove(SHINY_ABOMINATION);
+            SHINY_ABOMINATION.setVisible(true);
+            currentEvent.setText("You hear a familiar moan from behind you, however it could be mistaken with a laugh. With a chill down your spine, you realize an SHINY ABOMINATION has found you!");
         }
         else if (monsterNum == 3) {
-            mainImagePanel.remove(HOMUNCULUS);
+            HOMUNCULUS.setVisible(true);
+            currentEvent.setText("As you traverse the land, a weird rustling is heard. You recognize it immediately. A HOMUNCULUS jumps into view as you ready your sword.");
         }
         else if (monsterNum == 4) {
-            mainImagePanel.remove(SHINY_HOMUNCULUS);
+            SHINY_HOMUNCULUS.setVisible(true);
+            currentEvent.setText("As you traverse the land, your start profusely breaking into a sweat. It is too late you realize, as the SHINY HOMUNCULUS comes into view");
         }
         else if (monsterNum == 5) {
-            mainImagePanel.remove(JINN);
+            JINN.setVisible(true);
         }
         else if (monsterNum == 6) {
-            mainImagePanel.remove(SHINY_JINN);
+            SHINY_JINN.setVisible(true);
         }
         else if (monsterNum == 7) {
-            mainImagePanel.remove(LOST);
+            LOST.setVisible(true);
         }
         else if (monsterNum == 8) {
-            mainImagePanel.remove(SHINY_LOST);
+            SHINY_LOST.setVisible(true);
         }
         else if (monsterNum == 9) {
-            mainImagePanel.remove(SKELETON);
+            SKELETON.setVisible(true);
         }
         else if (monsterNum == 10) {
-            mainImagePanel.remove(SHINY_SKELETON);
+            SHINY_SKELETON.setVisible(true);
         }
-        mainFrame.add(mainImagePanel);
-        mainFrame.setVisible(true);
+    }
+
+    public static void removeEnemy(int monsterNum, JPanel mainImagePanel, JTextArea currentEvent) {
+        if (monsterNum == 1) {
+            ABOMINATION.setVisible(false);
+        }
+        else if (monsterNum == 2) {
+            SHINY_ABOMINATION.setVisible(false);
+        }
+        else if (monsterNum == 3) {
+            HOMUNCULUS.setVisible(false);
+        }
+        else if (monsterNum == 4) {
+            SHINY_HOMUNCULUS.setVisible(false);
+        }
+        else if (monsterNum == 5) {
+            JINN.setVisible(false);
+        }
+        else if (monsterNum == 6) {
+            SHINY_JINN.setVisible(false);
+        }
+        else if (monsterNum == 7) {
+            LOST.setVisible(false);
+        }
+        else if (monsterNum == 8) {
+            SHINY_LOST.setVisible(false);
+        }
+        else if (monsterNum == 9) {
+            SKELETON.setVisible(false);
+        }
+        else {
+            SHINY_SKELETON.setVisible(false);
+        }
     }
 
     public static JPanel getMainImagePanel() {
         return mainImagePanel;
+    }
+
+    public static Abomination[] getAbominationObjects() {
+        return abominationObjects;
+    }
+
+    public static Homunculus[] getHomunculusObjects() {
+        return homunculusObjects;
+    }
+
+    public static Jinn[] getJinnObjects() {
+        return jinnObjects;
+    }
+
+    public static Lost[] getLostObjects() {
+        return lostObjects;
+    }
+
+    public static Skeleton[] getSkeletonObjects() {
+        return skeletonObjects;
     }
 }

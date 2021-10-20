@@ -1,5 +1,6 @@
 package game.origins;
 
+import game.origins.GUI.EnemyAction;
 import game.origins.GUI.OriginsGUI;
 import game.origins.enemies.*;
 
@@ -13,15 +14,14 @@ import java.util.Random;
  */
 public class Main {
 
-    public static void main(String[] Args) {
-
-        Abomination [] abominations = new Abomination[10];
-        Homunculus [] homunculi = new Homunculus[10];
-        Jinn [] jinns = new Jinn[10];
-        Lost[] lost = new Lost[10];
-        Skeleton [] skeletons = new Skeleton[10];
+    public static void main(String[] Args) throws InterruptedException {
 
         new OriginsGUI();
+
+        int num;
+
+        num = OriginsGUI.enemyInstance(1);
+
 
 
     }

@@ -1,5 +1,6 @@
 package game.origins.enemies;
 
+import javax.swing.*;
 import java.util.Random;
 
 /**
@@ -65,13 +66,17 @@ public class EnemyParentClass implements EnemyBehavior {
      * Removes health from the enemy
      * @param userAttack amount of damage the user inflicted to monster
      */
-    public void damageTaken(int userAttack) {
+    public void damageTaken(double userAttack) {
 
-        int damage = userAttack - defenseStat;
-        healthStat -= damage;
-
+        if (userAttack <= 0) {
+            healthStat -= 0;
+        }
+        else {
+            healthStat -= userAttack;
+        }
     }
 
-
-
+    public int getDefenseStat() {
+        return defenseStat;
+    }
 }
