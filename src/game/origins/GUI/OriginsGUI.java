@@ -4,6 +4,7 @@ package game.origins.GUI;
 import game.origins.enemies.*;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * <p>
@@ -18,9 +19,9 @@ public class OriginsGUI{
     private final Jinn[] jinnObjects;
     private final Lost[] lostObjects;
     private final Skeleton[] skeletonObjects;
-    private JPanel mainButtonPanel, mainTextPanel;
+    private JPanel mainButtonPanel;
     private JButton attack, defend, heal;
-    private JLabel skeleton, lost, jinn, homunculus, abomination;
+    private JTextArea currentEvent;
     private final ImageIcon ORIGINS_ICON_IMAGE = new ImageIcon("src/game/origins/images/OriginsIcon.png"); //Image of Origins icon
     public static JFrame mainFrame;
     public static JPanel mainImagePanel;
@@ -62,7 +63,7 @@ public class OriginsGUI{
 
         mainFrame = new JFrame();
         mainFrame.setTitle("Origins");
-        mainFrame.setSize(1200,700);
+        mainFrame.setSize(1220,700);
         mainFrame.setResizable(false);
         mainFrame.setLayout(null);
         mainFrame.setLocationRelativeTo(null);
@@ -73,18 +74,28 @@ public class OriginsGUI{
         mainButtonPanel = new JPanel();
         mainButtonPanel.setLayout(null);
         mainButtonPanel.setBounds(0,400,600,300);
-        mainTextPanel = new JPanel();
-        mainTextPanel.setLayout(null);
-        mainTextPanel.setBounds(600,400,600,300);
+
+        currentEvent = new JTextArea();
+        currentEvent.setBounds(600, 400, 600, 300);
+        currentEvent.setLineWrap(true);
+        currentEvent.setWrapStyleWord(true);
+        currentEvent.setFont(new Font("Copperplate Gothic Light", Font.PLAIN, 15));
+        currentEvent.setEditable(false);
 
         attack = new JButton();
         attack.setBounds(75, 50, 100, 150);
-        attack.addActionListener(e -> userAttacks(playerOne, EnemyAction.getCurrentEnemy()));
+        attack.setText("ATTACK");
+        attack.setFocusable(false);
+        attack.addActionListener(e -> userAttacks(playerOne, EnemyAction.getCurrentEnemy(), currentEvent));
         defend = new JButton();
         defend.setBounds(225, 50, 100, 150);
+        defend.setText("DEFEND");
+        defend.setFocusable(false);
         defend.addActionListener(e -> userDefends(playerOne));
         heal = new JButton();
         heal.setBounds(375, 50, 100, 150);
+        heal.setText("HEAL");
+        heal.setFocusable(false);
         heal.addActionListener(e -> userHeals(playerOne));
 
         mainButtonPanel.add(heal);
@@ -94,41 +105,66 @@ public class OriginsGUI{
         heal.setVisible(true);
         attack.setVisible(true);
         defend.setVisible(true);
+        currentEvent.setVisible(true);
 
         mainFrame.add(mainImagePanel);
         mainFrame.add(mainButtonPanel);
+        mainFrame.add(currentEvent);
         mainFrame.setIconImage(ORIGINS_ICON_IMAGE.getImage());
         mainFrame.setVisible(true);
 
+
     }
 
 
-    private double userAttacks(User player, int monsterType) {
+    private void userAttacks(User player, int monsterType, JTextArea currentEvent) {
         if (monsterType == 1) {
             double damage = player.getAttackStat() - abominationObjects[EnemyAction.getAbominationNum()].getDefenseStat();
-            return damage;
+            boolean successfulHit = abominationObjects[EnemyAction.getAbominationNum()].evasionChance(damage, currentEvent);
+            if (successfulHit) {
+                currentEvent.setText("You attacked the abomination with " + damage + " much damage! The abomination has " +
+                        abominationObjects[EnemyAction.getAbominationNum()].getHealthStat() + " hp left.");
+            }
         }
 
         else if (monsterType == 2) {
-            double damage = player.getAttackStat() - (homunculusObjects[EnemyAction.getHomunculusNum()].getDefenseStat() * .5);
-            return damage;
+            double damage = player.getAttackStat() - homunculusObjects[EnemyAction.getHomunculusNum()].getDefenseStat();
+            boolean successfulHit = homunculusObjects[EnemyAction.getHomunculusNum()].evasionChance(damage, currentEvent);
+            if (successfulHit) {
+                currentEvent.setText("You attacked the homunculus with " + damage + " much damage! The homunculus has " +
+                        homunculusObjects[EnemyAction.getHomunculusNum()].getHealthStat() + " hp left.");
+            }
         }
 
         else if (monsterType == 3) {
-            double damage = player.getAttackStat() - (jinnObjects[EnemyAction.getJinnNum()].getDefenseStat() * .5);
-            return damage;
+            double damage = player.getAttackStat() - jinnObjects[EnemyAction.getJinnNum()].getDefenseStat();
+            boolean successfulHit = jinnObjects[EnemyAction.getJinnNum()].evasionChance(damage, currentEvent);
+            if (successfulHit) {
+                currentEvent.setText("You attacked the jinn with " + damage + " much damage! The jinn has " +
+                        jinnObjects[EnemyAction.getJinnNum()].getHealthStat() + " hp left.");
+            }
         }
 
         else if (monsterType == 4) {
-            double damage = player.getAttackStat() - (lostObjects[EnemyAction.getLostNum()].getDefenseStat() * .5);
-            return damage;
+            double damage = player.getAttackStat() - lostObjects[EnemyAction.getLostNum()].getDefenseStat();
+            boolean successfulHit = lostObjects[EnemyAction.getLostNum()].evasionChance(damage, currentEvent);
+            if (successfulHit) {
+                currentEvent.setText("You attacked the lost with " + damage + " much damage! The lost has " +
+                        lostObjects[EnemyAction.getLostNum()].getHealthStat() + " hp left.");
+            }
         }
 
         else {
-            double damage = player.getAttackStat() - (skeletonObjects[EnemyAction.getSkeletonNum()].getDefenseStat() * .5);
-            return damage;
+            double damage = player.getAttackStat() - skeletonObjects[EnemyAction.getSkeletonNum()].getDefenseStat();
+            boolean successfulHit = skeletonObjects[EnemyAction.getSkeletonNum()].evasionChance(damage, currentEvent);
+            if (successfulHit) {
+                currentEvent.setText("You attacked the skeleton with " + damage + " much damage! The skeleton has " +
+                        skeletonObjects[EnemyAction.getSkeletonNum()].getHealthStat() + " hp left.");
+            }
         }
     }
+
+
     private void userDefends(User player) {
 
         player.defendAction();

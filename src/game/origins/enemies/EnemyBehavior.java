@@ -1,5 +1,7 @@
 package game.origins.enemies;
 
+import javax.swing.*;
+
 /**
  * Interface that which contains all universal actions of monsters in Origins.
  */
@@ -24,7 +26,7 @@ public interface EnemyBehavior {
      * Monster receives an attack
      * @param userAttack amount of damage the user inflicts
      */
-    void damageTaken(int userAttack);
+    void damageTaken(double userAttack);
 
 
     /**

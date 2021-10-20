@@ -1,5 +1,6 @@
 package game.origins.enemies;
 
+import javax.swing.*;
 import java.util.Random;
 
 /**
@@ -32,19 +33,16 @@ public class Lost extends EnemyParentClass {
     private final int BASE_HP = 20;
     private final double BASE_EVASION = .04;
 
-    /**
-     * Determines whether the monster evaded damage before it calls super class method
-     * @param userAttack amount of damage the user inflicted to monster
-     */
-    @Override
-    public void damageTaken(int userAttack) {
+    public boolean evasionChance(double userAttack, JTextArea currentEvent) {
         int rand = new Random().nextInt(100);
 
         if (rand <= (BASE_EVASION * 100)) {
-            //"ATTACK HAS BEEN EVADED"
+            currentEvent.setText("ALAS THE MONSTER EVADED YOUR ATTACK!");
+            return false;
         }
         else {
             super.damageTaken(userAttack);
+            return true;
         }
     }
 
