@@ -17,16 +17,25 @@ public class Jinn extends EnemyParentClass {
      */
     public Jinn(int level) {
         this.level = level;
-        defenseStat = level * BASE_DEFENSE;
-        attackStat = level * BASE_ATTACK;
-        speedStat = level * BASE_SPEED;
-        healthStat = level * BASE_HP;
         shiny = shinyStatus();
+        if (isShiny()) {
+            defenseStat = level * (BASE_DEFENSE + 2);
+            attackStat = level * (BASE_ATTACK + 2);
+            speedStat = level * (BASE_SPEED + 2);
+            healthStat = level * (BASE_HP + 2);
+        }
+        else {
+            defenseStat = level * BASE_DEFENSE;
+            attackStat = level * BASE_ATTACK;
+            speedStat = level * BASE_SPEED;
+            healthStat = level * BASE_HP;
+            shiny = shinyStatus();
+        }
     }
 
     //Jinn data members
     private final int BASE_DEFENSE = 4;
-    private final int BASE_ATTACK = 4;
+    private final int BASE_ATTACK = 5;
     private final int BASE_SPEED = 4;
     private final int BASE_HP = 30;
     private final double BASE_EVASION = .15;
