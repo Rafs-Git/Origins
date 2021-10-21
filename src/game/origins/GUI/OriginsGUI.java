@@ -28,16 +28,16 @@ public class OriginsGUI {
     private static boolean actionDone = false;
     public static JFrame mainFrame;
     public static JPanel mainImagePanel;
-    private static final ImageIcon NORMAL_SKELETON_IMAGE = new ImageIcon("src/game/origins/images/Skeleton.png");
-    private static final ImageIcon SHINY_SKELETON_IMAGE = new ImageIcon("src/game/origins/images/ShinySkeletonOrigins.png");
-    private static final ImageIcon NORMAL_JINN_IMAGE = new ImageIcon("src/game/origins/images/JinnOrigins.png");
-    private static final ImageIcon SHINY_JINN_IMAGE = new ImageIcon("src/game/origins/images/ShinyJinnOrigins.png");
-    private static final ImageIcon NORMAL_LOST_IMAGE = new ImageIcon("src/game/origins/images/LostOrigins.png");
-    private static final ImageIcon SHINY_LOST_IMAGE = new ImageIcon("src/game/origins/images/LostShinyOrigins.png");
-    private static final ImageIcon NORMAL_ABOMINATION_IMAGE = new ImageIcon("src/game/origins/images/AbominationOrigins.png");
-    private static final ImageIcon SHINY_ABOMINATION_IMAGE = new ImageIcon("src/game/origins/images/ShinyAbominationOrigins.png");
-    private static final ImageIcon NORMAL_HOMUNCULUS_IMAGE = new ImageIcon("src/game/origins/images/HomunculusOrigins.png");
-    private static final ImageIcon SHINY_HOMUNCULUS_IMAGE = new ImageIcon("src/game/origins/images/ShinyHomunculusOrigins.png");
+    private static final ImageIcon NORMAL_SKELETON_IMAGE = new ImageIcon(OriginsGUI.class.getClassLoader().getResource("game/origins/images/Skeleton.png"));
+    private static final ImageIcon SHINY_SKELETON_IMAGE = new ImageIcon(OriginsGUI.class.getClassLoader().getResource("game/origins/images/ShinySkeletonOrigins.png"));
+    private static final ImageIcon NORMAL_JINN_IMAGE = new ImageIcon(OriginsGUI.class.getClassLoader().getResource("game/origins/images/JinnOrigins.png"));
+    private static final ImageIcon SHINY_JINN_IMAGE = new ImageIcon(OriginsGUI.class.getClassLoader().getResource("game/origins/images/ShinyJinnOrigins.png"));
+    private static final ImageIcon NORMAL_LOST_IMAGE = new ImageIcon(OriginsGUI.class.getClassLoader().getResource("game/origins/images/LostOrigins.png"));
+    private static final ImageIcon SHINY_LOST_IMAGE = new ImageIcon(OriginsGUI.class.getClassLoader().getResource("game/origins/images/LostShinyOrigins.png"));
+    private static final ImageIcon NORMAL_ABOMINATION_IMAGE = new ImageIcon(OriginsGUI.class.getClassLoader().getResource("game/origins/images/AbominationOrigins.png"));
+    private static final ImageIcon SHINY_ABOMINATION_IMAGE = new ImageIcon(OriginsGUI.class.getClassLoader().getResource("game/origins/images/ShinyAbominationOrigins.png"));
+    private static final ImageIcon NORMAL_HOMUNCULUS_IMAGE = new ImageIcon(OriginsGUI.class.getClassLoader().getResource("game/origins/images/HomunculusOrigins.png"));
+    private static final ImageIcon SHINY_HOMUNCULUS_IMAGE = new ImageIcon(OriginsGUI.class.getClassLoader().getResource("game/origins/images/ShinyHomunculusOrigins.png"));
     private static final JLabel SKELETON = new JLabel(NORMAL_SKELETON_IMAGE);
     private static final JLabel SHINY_SKELETON = new JLabel(SHINY_SKELETON_IMAGE);
     private static final JLabel JINN = new JLabel(NORMAL_JINN_IMAGE);
@@ -306,7 +306,7 @@ public class OriginsGUI {
                     "By the time you realize those sounds were not you, its too late. A SKELETON appears.");
             SKELETON.setVisible(true);
         } else if (monsterNum == 10) {
-            currentEvent.setText("Traversing through the rocky environment causes painful aches throughout your body. Much worse than the aches is the feeling of something peering through your flesh and into your bones " +
+            currentEvent.setText("Traversing through the rocky environment causes painful aches throughout your body. Much worse than the aches is the feeling of something peering through your flesh and into your bones. " +
                     "By the time you realize that this feeling was your instincts screaming at you to run away, its too late. A SHINY SKELETON appears.");
             SHINY_SKELETON.setVisible(true);
         }

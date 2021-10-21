@@ -17,7 +17,7 @@ public class Homunculus extends EnemyParentClass {
     public Homunculus(int level) {
         this.level = level;
         shiny = shinyStatus();
-        if (isShiny()) {
+        if (shiny) {
             defenseStat = level * (BASE_DEFENSE + 1);
             attackStat = level * (BASE_ATTACK + 2);
             speedStat = level * (BASE_SPEED + 1);

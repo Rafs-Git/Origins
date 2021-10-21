@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="FirstGame:jar">
+    <output-path>$USER_HOME$/Desktop/game</output-path>
+    <root id="archive" name="FirstGame.jar">
+      <element id="module-output" name="FirstGame" />
+    </root>
+  </artifact>
+</component>

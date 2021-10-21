@@ -18,7 +18,7 @@ public class Jinn extends EnemyParentClass {
     public Jinn(int level) {
         this.level = level;
         shiny = shinyStatus();
-        if (isShiny()) {
+        if (shiny) {
             defenseStat = level * (BASE_DEFENSE + 2);
             attackStat = level * (BASE_ATTACK + 2);
             speedStat = level * (BASE_SPEED + 2);
