@@ -40,12 +40,12 @@ public class Main {
                     isActionDone = OriginsGUI.isActionDone();
                 }
                 OriginsGUI.hideButtons();
-                Thread.sleep(1500);
+                Thread.sleep(3000);
                 if (OriginsGUI.checkEnemyHealth()) {
                     OriginsGUI.enemyAttacker(playerOne);
                     playerOne.setDefenseStat();
                 }
-                Thread.sleep(1500);
+                Thread.sleep(3000);
                 OriginsGUI.setActionDone(false);
                 isActionDone = false;
                 OriginsGUI.showButtons();
