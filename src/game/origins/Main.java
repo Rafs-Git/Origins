@@ -29,7 +29,7 @@ public class Main {
             level = i;
             playerOne.setLevel(level);
             num = OriginsGUI.enemyInstance(level);
-            Thread.sleep(3000);
+            Thread.sleep(8000);
             OriginsGUI.showButtons();
             do {
 

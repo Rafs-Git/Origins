@@ -289,15 +289,25 @@ public class OriginsGUI {
             currentEvent.setText("As you traverse the land, your start profusely breaking into a sweat. It is too late you realize, as the SHINY HOMUNCULUS comes into view");
         } else if (monsterNum == 5) {
             JINN.setVisible(true);
+            currentEvent.setText("As you continue your journey, you hear faint whispers all around you. They get louder and louder until the source appears before you." +
+                    " The JINN roars.");
         } else if (monsterNum == 6) {
+            currentEvent.setText("As you continue your journey, you hear hoarse whispers all around you. Seemingly with no end, you start going mad." +
+                    " The SHINY JINN roars.");
             SHINY_JINN.setVisible(true);
         } else if (monsterNum == 7) {
+            currentEvent.setText("Tired from you journey, you take a break. Suddenly, you hear strained shouts and cries for help. You run to the source to see a LOST.");
             LOST.setVisible(true);
         } else if (monsterNum == 8) {
+            currentEvent.setText("Tired from you journey, you take a break. Suddenly, you hear calls for you. Strangely, they use your name. You apprehensively go to the source of the calls to see a SHINY LOST.");
             SHINY_LOST.setVisible(true);
         } else if (monsterNum == 9) {
+            currentEvent.setText("Traversing through the rocky environment causes painful aches throughout your body. Its almost as if you can hear you joints crackle as you navigate through the land. " +
+                    "By the time you realize those sounds were not you, its too late. A SKELETON appears.");
             SKELETON.setVisible(true);
         } else if (monsterNum == 10) {
+            currentEvent.setText("Traversing through the rocky environment causes painful aches throughout your body. Much worse than the aches is the feeling of something peering through your flesh and into your bones " +
+                    "By the time you realize that this feeling was your instincts screaming at you to run away, its too late. A SHINY SKELETON appears.");
             SHINY_SKELETON.setVisible(true);
         }
     }

@@ -92,8 +92,8 @@ public class User {
 
     public void healAction(JTextArea currentEvent) {
         if (healthStat < fullHP) {
-            healthStat += (attackStat * 3);
-            currentEvent.setText("You have healed your hp for " + (attackStat * 3) + " points! You now currently have "
+            healthStat += (attackStat * 2);
+            currentEvent.setText("You have healed your hp for " + (attackStat * 2) + " points! You now currently have "
                     + healthStat + " much HP!");
         }
         else {
